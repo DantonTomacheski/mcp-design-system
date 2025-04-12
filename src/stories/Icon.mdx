@@ -1,0 +1,109 @@
+import { Meta, Story, Canvas, Controls, ColorPalette, ColorItem } from '@storybook/blocks';
+import * as IconStories from './Icon.stories';
+import { iconSizeTokens, iconColorTokens } from '../components/tokens/iconTokens';
+
+<Meta of={IconStories} title="Design System/Guidelines/Icon Specifications" />
+
+# Icon Component
+
+Our Icon component renders SVG icons from our design system, following precise specifications from our Figma design.
+
+## Implementation
+
+The Icon component is built according to the Atomic Design methodology, where icons serve as fundamental atoms in our design system. Each icon is a single SVG path with appropriate sizing and stroke weights.
+
+## Figma Design Specifications
+
+Our icons follow precise sizing and stroke weight guidelines from our Figma design system:
+
+| Size (px) | Stroke Weight | Use Case |
+|-----------|---------------|----------|
+| 16        | 1.6px         | Dense UIs, table actions |
+| 20        | 2.0px         | Small UI elements |
+| 24        | 2.5px         | Standard UI size |
+| 32        | 3.0px         | Featured UI elements |
+| 40        | 3.5px         | Highlighted features |
+| 48        | 4.0px         | Hero sections, intros |
+
+## Visual Reference
+
+<Canvas of={IconStories.AllSizes} />
+
+## Icon Usage Examples
+
+### Basic Usage
+
+```tsx
+import { Icon } from '../components/icons/Icon';
+
+// Default size (24px)
+<Icon name="activity" />
+
+// Specific size
+<Icon name="star" size={32} />
+
+// With custom color
+<Icon name="alert-circle" color="warning" />
+
+// With custom accessibility label
+<Icon name="settings" title="Settings" description="Configure application settings" />
+```
+
+## Available Icons
+
+<Canvas of={IconStories.AllIcons} />
+
+## Color Variations
+
+Our icons support all color tokens from our design system:
+
+<Canvas of={IconStories.ColorVariants} />
+
+## Composability Examples
+
+Icons can be combined with other components to create more complex interfaces:
+
+<Canvas of={IconStories.Composability} />
+
+## Component API
+
+<Controls />
+
+## Implementation Notes
+
+When implementing icons in your application, ensure:
+
+1. SVG icons maintain consistent padding within their viewBox
+2. Proper scaling is applied when changing sizes
+3. Stroke weights are adjusted proportionally according to the size
+4. Color tokens are applied consistently
+5. Add appropriate accessibility attributes (title, description) for screen readers
+
+## Design Tokens
+
+### Size Tokens
+
+```tsx
+// Defined size and stroke weight tokens from Figma
+const iconSizeTokens = {
+  16: { size: '16px', strokeWidth: '1.6px' },
+  20: { size: '20px', strokeWidth: '2px' },
+  24: { size: '24px', strokeWidth: '2.5px' },
+  32: { size: '32px', strokeWidth: '3px' },
+  40: { size: '40px', strokeWidth: '3.5px' },
+  48: { size: '48px', strokeWidth: '4px' }
+};
+```
+
+### Color Tokens
+
+<ColorPalette>
+  {Object.entries(iconColorTokens).map(([name, value]) => (
+    <ColorItem 
+      key={name}
+      title={name} 
+      subtitle={`var(--color-${name})`}
+      colors={{ [name]: value }} 
+    />
+  ))}
+</ColorPalette>
